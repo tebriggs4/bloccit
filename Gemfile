@@ -1,0 +1,27 @@
+source 'https://rubygems.org'
+ 
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.2.5'
+ 
+# We specify different databases for our Development and Production environments.
+# We use sqlite3 for our Development environment because it is an easy to use database
+# perfect for rapid testing. Heroku only supports Postgres, so we use pg in our Production environment.
+group :production do
+  gem 'pg'
+end
+ 
+# #2
+group :development do
+  gem 'sqlite3'
+end
+ 
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.1.0'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'

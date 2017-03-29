@@ -10,10 +10,15 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
- 
-# #2
+
 group :development do
   gem 'sqlite3'
+end
+
+# We added rspec-rails to the :development and :test groups because we want its tasks and generators
+# to be available in both environments. We specified a version (~> 3.0) to maintain predictable behavior despite new RSpec releases.
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
 end
  
 # Use SCSS for stylesheets

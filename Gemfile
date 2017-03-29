@@ -8,6 +8,7 @@ gem 'rails', '4.2.5'
 # perfect for rapid testing. Heroku only supports Postgres, so we use pg in our Production environment.
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
  
 # #2

@@ -13,6 +13,7 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'pry-rails'
 end
 
 # We added rspec-rails to the :development and :test groups because we want its tasks and generators

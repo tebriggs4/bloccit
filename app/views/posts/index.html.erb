@@ -1,0 +1,14 @@
+<h1>All Posts</h1>
+# We iterate over each post in @posts. For each post we create a link with  post.title as the
+# text that links to /posts/id, with the id from the post.id. Instance variables created in a 
+# controller method are available in its associated view. Since we create and assign @posts in 
+# PostsController#index, we can use it in the posts index view.
+<% @posts.each do |post| %>
+<div class="media">
+    <div class="media-body">
+        <h4 class="media-heading">
+            <%= link_to post.title, post %>
+        </h4>
+    </div>
+</div>
+<% end %>

@@ -10,7 +10,8 @@
         </ul>
     </div>
     <div class="col-md-8">
-        <%= form_for @post do |f| %>
+        <!-- Just like link_to, form_for can take an array of objects instead of a single object to generate the correct paths for nested resources. -->
+        <%= form_for [@topic, @post] do |f| %>
             <div class="form-group">
                 <!-- We use f.label to display title. This functionality is provided by form_for, which yields
                      a form builder object that, in turn, provides f.label. f.label, in turn, creates an HTML label

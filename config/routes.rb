@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   # We call the resources method and pass it a Symbol. This instructs Rails to create post routes
   # for creating, updating, viewing, and deleting instances of Post. We'll review the precise URIs created in a moment.
   
-  resources :posts
+  resources :topics do
+    # We pass resources :posts to the resources :topics block. This nests the post routes under the topic routes.
+    resources :posts, except: [:index]
+  end
   
   # We remove get "welcome/index" because we've declared the index view as the root view. We also modify
   # the about route to allow users to visit /about, rather than  /welcome/about.

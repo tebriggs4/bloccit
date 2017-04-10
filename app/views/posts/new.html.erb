@@ -10,26 +10,6 @@
         </ul>
     </div>
     <div class="col-md-8">
-        <!-- Just like link_to, form_for can take an array of objects instead of a single object to generate the correct paths for nested resources. -->
-        <%= form_for [@topic, @post] do |f| %>
-            <div class="form-group">
-                <!-- We use f.label to display title. This functionality is provided by form_for, which yields
-                     a form builder object that, in turn, provides f.label. f.label, in turn, creates an HTML label
-                     tag for the object that is specified.  It will yield: <label for="post_title">Title/</label> -->
-                <%= f.label :title %>
-                <!-- f.text_field is another method that FormHelper provides and creates an input tag of type text.
-                     It will yield: <input class="form-control" placeholder="Enter post title" type="text" name="post[title]" id="post_title"> -->
-                <%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :body %>
-                <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
-            </div>
-            <div class="form-group">
-                <!-- f.submit yields an input tag of type submit. It will yield:
-                     <input type="submit" name="commit" value="Save" class="btn btn-success"> -->
-                <%= f.submit "Save", class: 'btn btn-success' %>
-            </div>
-        <% end %>
+        <%= render partial: 'form', locals: { topic: @topic, post: @post } %>
     </div>
 </div>

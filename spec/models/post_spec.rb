@@ -14,6 +14,14 @@ RSpec.describe Post, type: :model do
     let(:post) { topic.posts.create!(title: title, body: body) }
  
     it { is_expected.to belong_to(:topic) }
+    
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:body) }
+    it { is_expected.to validate_presence_of(:topic) }
+ 
+    it { is_expected.to validate_length_of(:title).is_at_least(5) }
+    it { is_expected.to validate_length_of(:body).is_at_least(20) }
+ 
  
     # We test whether post has attributes named title and body. This tests whether post will return
     # a non-nil value when post.title and post.body is called.

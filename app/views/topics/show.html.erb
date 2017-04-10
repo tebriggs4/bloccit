@@ -22,10 +22,27 @@
                 </div>
             </div>
         <% end %>
+        <!-- We iterate over the sponsored_posts belonging to @topic, and display each sponsored_post. -->
+        <% @topic.sponsored_posts.each do |sponsored_post| %>
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <!-- We refactor how we link to individual posts using the topic_post_path method.
+                        # This helper takes a topic and a post and generates a path to the posts show view. -->
+                        <%= link_to sponsored_post.title, topic_sponsored_post_path(@topic, sponsored_post) %>
+                    </h4>
+                    <!-- We add submission and comment details for each sponsored_post in the show view. -->
+                    <small>
+                        submitted <%= time_ago_in_words(sponsored_post.created_at) %> ago <br>
+                    </small>
+                </div>
+            </div>
+        <% end %>
     </div>
     <div class="col-md-4">
         <!-- We replace new_post_path with new_topic_post_path to reflect the nested route we generated in routes.rb. -->
         <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
+        <%= link_to "New Sponsored Post", new_topic_sponsored_post_path(@topic), class: 'btn btn-success' %>
         <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
     </div>
 </div>

@@ -1,4 +1,5 @@
 class Topic < ActiveRecord::Base
     has_many :posts, dependent: :destroy
+    has_many :sponsored_posts
     # Because comments already depend on posts, they will also be deleted when a topic is deleted.
 end

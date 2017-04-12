@@ -21,6 +21,12 @@ RSpec.describe User, type: :model do
         it "should have name and email attributes" do
         expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
         end
+        
+        it "should format name" do
+            user.name = "tara briggs"
+            user.save
+            expect(user.name).to eq "Tara Briggs"
+        end
     end
     
     # We wrote a test that does not follow the same conventions as our previous tests. We are testing for a value

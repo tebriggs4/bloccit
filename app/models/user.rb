@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
     # We register an inline callback directly after the before_save callback.  
     # { self.email = email.downcase } is the code that will run when the callback executes.
     before_save { self.email = email.downcase if email.present? }
+    
+    before_save :format_name
 
     # We use Ruby's validates function to ensure that name is present and has a maximum and minimum length.
     validates :name, length: { minimum: 1, maximum: 100 }, presence: true
@@ -21,4 +23,14 @@ class User < ActiveRecord::Base
     # We use Ruby's has_secure_password. has_secure_password "adds methods to set and authenticate against a BCrypt password.
     # This mechanism requires you to have a password_digest attribute". 
     has_secure_password
+    
+    def format_name
+        if name
+            name_array = []
+            name.split.each do |name1|
+                name_array << name1.capitalize
+            end
+            self.name = name_array.join(" ")
+        end
+    end
 end

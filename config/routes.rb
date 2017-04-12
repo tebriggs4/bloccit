@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   
   # We create routes for new and create actions. The only hash key will prevent Rails from creating unnecessary routes.
   resources :users, only: [:new, :create]
+  
+  resources :sessions, only: [:new, :create, :destroy]
    
   # We remove get "welcome/index" because we've declared the index view as the root view. We also modify
   # the about route to allow users to visit /about, rather than  /welcome/about.

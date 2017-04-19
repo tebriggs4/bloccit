@@ -7,6 +7,18 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'random_data'
 
+# Create Users
+5.times do
+    User.create!(
+        # We wishful-coded two methods that we'll need to add to RandomData
+        name:     RandomData.random_name,
+        email:    RandomData.random_email,
+        password: RandomData.random_sentence
+    )
+end
+    
+users = User.all
+
 # Create Topics
 15.times do
     Topic.create!(
@@ -25,6 +37,7 @@ topics = Topic.all
         # We use methods from a class that does not exist yet, RandomData, that will create random strings
         # for title and body. Writing code for classes and methods that don't exist is known as "wishful coding"
         # and can increase productivity because it allows you to stay focused on one problem at a time.
+        user:   users.sample,
         topic:  topics.sample,
         title:  RandomData.random_sentence,
         body:   RandomData.random_paragraph
@@ -44,8 +57,15 @@ posts = Post.all
         body: RandomData.random_paragraph
     )
 end
+
+user = User.first
+user.update_attributes!(
+    email: 'tebriggs4@gmail.com', # replace this with your personal email
+    password: 'helloworld'
+)
  
 puts "Seed finished"
+puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"

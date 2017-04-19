@@ -2,6 +2,15 @@
 # requirements. Modules help keep common functions organized and reusable throughout our application. Unlike
 # classes, we can't instantiate or inherit from modules. Instead we use them as mixins to add functions to multiple classes.
 module RandomData
+    def self.random_name
+        first_name = random_word.capitalize
+        last_name = random_word.capitalize
+        "#{first_name} #{last_name}"
+    end
+ 
+    def self.random_email
+        "#{random_word}@#{random_word}.#{random_word}"
+    end
     # We define random_paragraph. We set sentences to an array. We create four to six random sentences and append them
     # to sentences. We call join on sentences to combine each sentence in the array, passing a space to separate each 
     # sentence. join combines each sentence into a full paragraph (as a string).

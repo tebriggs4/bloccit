@@ -2,7 +2,12 @@
  
 <div class="row">
     <div class="col-md-8">
-        <p><%= @post.body %></p>
+        <h1>
+            <%= @post.title %> <br>
+            <small>
+                submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
+            </small>
+        </h1>
     </div>
     <div class="col-md-4">
         <!-- We format a link as an Edit button which directs a user to  /posts/@post.id/edit.  

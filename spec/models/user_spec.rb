@@ -23,6 +23,55 @@ RSpec.describe User, type: :model do
         it "should have name and email attributes" do
         expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
         end
+        
+        # We expect that users will respond to role.
+        it "responds to role" do
+            expect(user).to respond_to(:role)
+        end
+ 
+        # We expect users will respond to admin?, which will return whether or not a user is an admin. We'll 
+        # implement this using the ActiveRecord::Enum class.
+        it "responds to admin?" do
+            expect(user).to respond_to(:admin?)
+        end
+ 
+        # We expect users will respond to member?, which will return whether or not a user is a member.
+        it "responds to member?" do
+            expect(user).to respond_to(:member?)
+        end
+    end
+
+    describe "roles" do
+        # We expect that users will be assigned the role of member by default.
+        it "is member by default" do
+            expect(user.role).to eql("member")
+        end
+ 
+        # We test member and admin users within separate contexts.
+        context "member user" do
+            it "returns true for #member?" do
+                expect(user.member?).to be_truthy
+            end
+ 
+            it "returns false for #admin?" do
+                expect(user.admin?).to be_falsey
+            end
+        end
+ 
+        # We test member and admin users within separate contexts.
+        context "admin user" do
+            before do
+                user.admin!
+            end
+ 
+            it "returns false for #member?" do
+                expect(user.member?).to be_falsey
+            end
+ 
+            it "returns true for #admin?" do
+                expect(user.admin?).to be_truthy
+            end
+        end
     end
     
     # We wrote a test that does not follow the same conventions as our previous tests. We are testing for a value

@@ -19,6 +19,9 @@
     </div>
     <div class="col-md-4">
         <!-- We create a link to create a new topic. -->
-        <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
+        <!-- We check if there is a signed-in current_user, and that current_user is an admin. -->
+        <% if user_is_authorized_for_topics? %>
+            <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
+        <% end %>    
     </div>
 </div>

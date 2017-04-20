@@ -27,9 +27,11 @@
     </div>
     <div class="col-md-4">
         <!-- We replace new_post_path with new_topic_post_path to reflect the nested route we generated in routes.rb. -->
-        <% if user_is_authorized_for_topics? %>
+        <% if user_is_moderator_for_topics? || user_is_authorized_for_topics? %>
             <%= link_to "Edit Topic", edit_topic_path(@topic), class: 'btn btn-success' %>
-            <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+            <% if user_is_authorized_for_topics? %>
+                <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+            <% end %>
         <% end %>
     </div>
 </div>

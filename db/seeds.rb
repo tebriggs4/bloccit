@@ -51,6 +51,7 @@ posts = Post.all
 # it is easier to read and thus more idiomatic.
 100.times do
     Comment.create!(
+        user: users.sample,
         # We call sample on the array returned by Post.all, in order to pick a random post to associate each comment with.
         # sample returns a random element from the array every time it's called.
         post: posts.sample,

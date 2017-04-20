@@ -7,6 +7,17 @@
             <small>
                 submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
             </small>
+            <div>
+               <h3>Comments</h3>
+               <!-- We will call _comment.html.erb and render all the comments which belong to the given post. -->
+               <%= render @post.comments %>
+            </div>
+            <!-- We allow signed in users to see the comment form. -->
+            <% if current_user %>
+                <!-- We render the comment form, and use comments/form, because we are rendering the comment form from a
+                     post view. If we didn't specify comments, Rails would render the posts form partial by default. -->
+                <%= render 'comments/form', comment: Comment.new, post: @post %>
+            <% end %>
         </h1>
     </div>
     <div class="col-md-4">

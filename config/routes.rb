@@ -7,6 +7,14 @@ Rails.application.routes.draw do
     resources :posts, except: [:index]
   end
   
+  # We use only: [] because we don't want to create any /posts/:id routes, just  posts/:post_id/comments routes.
+  resources :posts, only: [] do
+    # We only add create and destroy routes for comments. We'll display comments on the posts show view, so we won't need
+    # index or new routes. We also won't give users the ability to view individual comments or edit comments, removing the
+    # need for show, update, and edit routes.
+    resources :comments, only: [:create, :destroy]
+  end
+  
   # We create routes for new and create actions. The only hash key will prevent Rails from creating unnecessary routes.
   resources :users, only: [:new, :create]
   

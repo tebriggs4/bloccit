@@ -2,20 +2,10 @@
  
 <div class="row">
     <div class="col-md-8">
-        <!-- We loop over each topic in @topics. -->
+        <!-- We use partials to render each topic in @topics. -->
         <% @topics.each do |topic| %>
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <!-- We create a link to the show view for each topic. -->
-                        <%= link_to topic.name, topic %>
-                    </h4>
-                    <small>
-                        <%= topic.description %>
-                    </small>
-                </div>
-            </div>
-        <% end %>
+            <%= render partial: 'topic', locals: { topic: topic } %>
+        <% end %>    
     </div>
     <div class="col-md-4">
         <!-- We create a link to create a new topic. -->

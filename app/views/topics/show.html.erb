@@ -7,22 +7,9 @@
 <div class="row">
     <div class="col-md-8">
         <p class="lead"><%= @topic.description %></p>
-        <!-- We iterate over the posts belonging to @topic, and display each post. -->
+        <!-- We use partials and render to display each post belonging to @topic. -->
         <% @topic.posts.each do |post| %>
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <!-- We refactor how we link to individual posts using the topic_post_path method.
-                        # This helper takes a topic and a post and generates a path to the posts show view. -->
-                        <%= link_to post.title, topic_post_path(@topic, post) %>
-                    </h4>
-                    <!-- We add submission and comment details for each post in the show view. -->
-                    <small>
-                        submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
-                        <%= post.comments.count %> Comments
-                    </small>
-                </div>
-            </div>
+            <%= render partial: 'posts/post', locals: { post: post } %>
         <% end %>
     </div>
     <div class="col-md-4">

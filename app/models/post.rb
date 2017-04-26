@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
     # dependent: :destroy to ensure that votes are destroyed when their parent post is deleted.
     has_many :votes, dependent: :destroy
     
+    after_create :create_vote
+    
     # The default_scope will order all posts by their rank inn descending order.
     default_scope { order('rank DESC') }
     
@@ -37,6 +39,10 @@ class Post < ActiveRecord::Base
         age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds
         new_rank = points + age_in_days
         update_attribute(:rank, new_rank)
+    end
+    
+    def create_vote
+        user.votes.create(value: 1, post: self)
     end
    
 end

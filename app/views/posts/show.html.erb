@@ -1,24 +1,27 @@
-<h1><%= @post.title %></h1>
- 
 <div class="row">
     <div class="col-md-8">
-        <h1>
-            <%= @post.title %> <br>
-            <small>
-                submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
-            </small>
-            <div>
-               <h3>Comments</h3>
-               <!-- We will call _comment.html.erb and render all the comments which belong to the given post. -->
-               <%= render @post.comments %>
-            </div>
-            <!-- We allow signed in users to see the comment form. -->
-            <% if current_user %>
-                <!-- We render the comment form, and use comments/form, because we are rendering the comment form from a
-                     post view. If we didn't specify comments, Rails would render the posts form partial by default. -->
-                <%= render 'comments/form', comment: Comment.new, post: @post %>
-            <% end %>
-        </h1>
+        <div>
+            <!-- It's a good idea to pass post in explicitly, rather than implicitly expect @post. This is why the partial
+                 we created references post instead of @post. -->
+            <%= render partial: 'votes/voter', locals: { post: @post } %>
+            <h1>
+                <%= @post.title %> <br>
+                <small>
+                    submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
+                </small>
+            </h1>
+        </div>
+        <div>
+            <h3>Comments</h3>
+            <!-- We will call _comment.html.erb and render all the comments which belong to the given post. -->
+            <%= render @post.comments %>
+        </div>
+        <!-- We allow signed in users to see the comment form. -->
+        <% if current_user %>
+            <!-- We render the comment form, and use comments/form, because we are rendering the comment form from a
+                 post view. If we didn't specify comments, Rails would render the posts form partial by default. -->
+            <%= render 'comments/form', comment: Comment.new, post: @post %>
+        <% end %>
     </div>
     <div class="col-md-4">
         <!-- We format a link as an Edit button which directs a user to  /posts/@post.id/edit.  
@@ -35,5 +38,17 @@
             <!-- We update link_to to take an array consisting of a topic and post, which it uses to build the link to delete a nested post. -->
             <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
         <% end %>
-   </div>
+    </div>
+    <div class="col-md-4">
+        <h3>
+            <!-- We use the pluralize helper method to display the correctly pluralized forms of "point", "up vote", and "down vote". -->
+            <%= pluralize(@post.points, 'point') %>
+            <div>
+                <small>
+                    <%= pluralize(@post.up_votes, 'up vote') %>,
+                    <%= pluralize(@post.down_votes, 'down vote') %>
+                </small>
+            </div>
+        </h3>
+    </div>
 </div>

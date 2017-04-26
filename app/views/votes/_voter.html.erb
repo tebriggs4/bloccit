@@ -1,0 +1,12 @@
+<!-- Only signed in users will be allowed to see voter partials, and avoid potential confusion from users who are not signed in. -->
+<% if current_user %>
+    <div class="vote-arrows pull-left">
+        <!-- Because we haven't yet determined these links' locations yet, we stubbed their paths in the link_to methods.
+             A pound sign in quotes — '#' or "#" — is the conventional path for a pending or stubbed link. -->
+        <!-- We use method: :post, because link_to generates GET requests by default. -->
+        <div><%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-chevron-up', method: :post %></div>
+        <div><strong><%= post.points %></strong></div>
+        <!-- We use method: :post, because link_to generates GET requests by default. -->
+        <div><%= link_to " ", post_down_vote_path(post), class: 'glyphicon glyphicon-chevron-down', method: :post %></div>
+    </div>
+<% end %>

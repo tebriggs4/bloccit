@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
     # We add the votes association to Post. This relates the models and allows us to call post.votes. We also add 
     # dependent: :destroy to ensure that votes are destroyed when their parent post is deleted.
     has_many :votes, dependent: :destroy
+    has_many :favorites, dependent: :destroy
     
     # The default_scope will order all posts by their rank inn descending order.
     default_scope { order('rank DESC') }

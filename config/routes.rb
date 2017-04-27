@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     # index or new routes. We also won't give users the ability to view individual comments or edit comments, removing the
     # need for show, update, and edit routes.
     resources :comments, only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy]
     
     # These new lines create POST routes at the URL posts/:id/up-vote and  posts/:id/down-vote. 
     # The as key-value pairs at the end stipulate the method names which will be associated with 

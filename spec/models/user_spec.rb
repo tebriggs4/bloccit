@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:posts) }
     it { is_expected.to have_many(:comments) }
     it { is_expected.to have_many(:votes) }
+    it { is_expected.to have_many(:favorites) }
     # Shoulda tests for name
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_length_of(:name).is_at_least(1) }
@@ -90,6 +91,25 @@ RSpec.describe User, type: :model do
  
         it "should be an invalid user due to blank email" do
             expect(user_with_invalid_email).to_not be_valid
+        end
+    end
+    
+    describe "#favorite_for(post)" do
+        before do
+            topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
+            @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+        end
+
+        it "returns `nil` if the user has not favorited the post" do
+            # We expect that favorite_for will return nil if the user has not favorited  @post.
+            expect(user.favorite_for(@post)).to be_nil
+        end
+ 
+        it "returns the appropriate favorite if it exists" do
+            # We create a favorite for user and @post.
+            favorite = user.favorites.where(post: @post).create
+            # We expect that favorite_for will return the favorite we created in the line before.
+            expect(user.favorite_for(@post)).to eq(favorite)
         end
     end
 end

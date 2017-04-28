@@ -22,8 +22,9 @@ Rails.application.routes.draw do
     post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
   
-  # We create routes for new and create actions. The only hash key will prevent Rails from creating unnecessary routes.
-  resources :users, only: [:new, :create]
+  # We create routes for new and create and show (added with factories) actions. The only hash key will prevent Rails 
+  # from creating unnecessary routes.
+  resources :users, only: [:new, :create, :show]
   
   resources :sessions, only: [:new, :create, :destroy]
    

@@ -33,5 +33,10 @@ class UsersController < ApplicationController
         @user.password_confirmation = params[:user][:password_confirmation]
  
     end
-
+    
+    # We retrieve a user instance and set it to an instance variable.
+    def show
+        @user = User.find(params[:id])
+        @posts = @user.posts.visible_to(current_user)
+    end
 end

@@ -22,8 +22,19 @@
 </div>
  
 <!-- We display all of the user's posts and comments using partials. -->
-<h2>Posts</h2>
-<%= render @user.posts %>
- 
-<h2>Comments</h2>
-<%= render @user.comments %>
+<% if user_has_posts?(@user) %>
+    <h2>Posts</h2>
+    <%= render @user.posts %>
+<% else %>
+    <p><%= @user.name %> has not submitted any posts yet"</p>
+<% end %>
+    
+<% if user_has_comments?(@user) %>
+    <h2>Comments</h2>
+    <%= render @user.comments %>
+<% else %>
+    <p><%= @user.name %> has not submitted any comments yet"</p>
+<% end %>
+
+<h2>Favorite Posts</h2>
+<%= render @user.favorites.map(&:post) %>

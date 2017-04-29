@@ -3,6 +3,7 @@
     <div class="media-body">
         <h4 class="media-heading">
             <%= link_to post.title, topic_post_path(post.topic, post) %>
+            <%= image_tag(post.user.avatar_url(48), class: "gravatar") %>
         </h4>
         <small>
             submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
